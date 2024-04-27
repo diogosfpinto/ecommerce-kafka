@@ -5,30 +5,29 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 /**
  * CLASSE CONSUMIDORA
  */
-public class FraudDetectorService {
+public class EmailService {
 
     public static void main(String[] args) {
-
-        var fraudService = new FraudDetectorService();
-        try (var service = new KafkaService(FraudDetectorService.class.getSimpleName(),
-                "ECOMMERCE_NEW_ORDER", fraudService::parse)){
+        var emailService = new EmailService();
+        try (var service = new KafkaService(EmailService.class.getSimpleName(),
+                "ECOMMERCE_SEND_EMAIL", emailService::parse)){
             service.run();
         }
-
     }
 
-    private void parse(ConsumerRecord<String, String> record) {
+    private void parse(ConsumerRecord<String,String> record){
         System.out.println("----------------------");
-        System.out.println("Processing new order, checking for fraud");
+        System.out.println("Sending email");
         System.out.println(record.key());
         System.out.println(record.value());
         System.out.println(record.partition());
         System.out.println(record.offset());
 
         try{
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
+        System.out.println("Email sent.");
     }
 }
