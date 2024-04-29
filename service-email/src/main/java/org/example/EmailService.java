@@ -25,7 +25,7 @@ public class EmailService {
         System.out.println("----------------------");
         System.out.println("Sending email");
         System.out.println(record.key());
-        System.out.println(record.value());
+        System.out.println(record.value().toString());
         System.out.println(record.partition());
         System.out.println(record.offset());
 
